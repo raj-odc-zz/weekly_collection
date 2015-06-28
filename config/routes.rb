@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :expenses
+
+  resources :expense_types
+
+  resources :daily_collections
+
   resources :loans
 
   resources :customers

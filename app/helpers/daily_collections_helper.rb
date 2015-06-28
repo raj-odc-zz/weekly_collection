@@ -1,0 +1,2 @@
+module DailyCollectionsHelper
+end
