@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630064501) do
+ActiveRecord::Schema.define(version: 20150630104616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bulk_imports", force: true do |t|
+    t.boolean  "status"
+    t.date     "collection_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bulk_imports", ["user_id"], name: "index_bulk_imports_on_user_id", using: :btree
 
   create_table "customers", force: true do |t|
     t.string   "name"
@@ -30,6 +40,37 @@ ActiveRecord::Schema.define(version: 20150630064501) do
   add_index "customers", ["location"], name: "index_customers_on_location", using: :btree
   add_index "customers", ["mobile_number"], name: "index_customers_on_mobile_number", using: :btree
   add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
+
+  create_table "daily_collections", force: true do |t|
+    t.integer  "loan_id"
+    t.float    "amount"
+    t.date     "collection_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "daily_collections", ["loan_id"], name: "index_daily_collections_on_loan_id", using: :btree
+  add_index "daily_collections", ["user_id"], name: "index_daily_collections_on_user_id", using: :btree
+
+  create_table "entries", force: true do |t|
+    t.integer  "entry_type_id"
+    t.integer  "user_id"
+    t.float    "amount"
+    t.date     "entry_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entries", ["entry_type_id"], name: "index_entries_on_entry_type_id", using: :btree
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
+
+  create_table "entry_types", force: true do |t|
+    t.string   "name"
+    t.boolean  "income"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "loans", force: true do |t|
     t.integer  "customer_id"

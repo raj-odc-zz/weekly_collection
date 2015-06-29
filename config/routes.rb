@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :entries
+
+  resources :entry_types
+
   resources :expenses
 
   resources :expense_types

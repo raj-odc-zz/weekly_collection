@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
   has_many :daily_collections
-  has_many :expenses
+  has_many :entries
   has_many :bulk_imports
 end

@@ -1,4 +1,4 @@
-<%= form_for(@loan) do |f| %>
+<%= form_for(@loan, html: { class: 'form col-md-6 col-md-offset-3' }) do |f| %>
   <% if @loan.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
@@ -10,54 +10,59 @@
       </ul>
     </div>
   <% end %>
-    <div class="field">
+    <div class="fieldset">
+    <div class="form-group">
       <%= f.label :customer_id %>
-      <%= collection_select(:loan, :customer_id, @customers, :id, :name_location)%>
+      <%= collection_select(:loan, :customer_id, @customers, :id, :name_location, class: 'form-control')%>
     </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :order_no %><br>
-    <%= f.number_field :order_no %>
+    <%= f.number_field :order_no, class: 'form-control' %>
   </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :vasool_day %>
       <%= select(:loan,
                  :vasool_day,
                  Loan.vasool_day.values.map { |x| [x, Loan.vasool_day.values.index(x) + 1] },
-                 {:include_blank => "-Any-", :selected => check_for_value(@loan.vasool_day)})%>
+                 { :include_blank => "-Any-", :selected => check_for_value(@loan.vasool_day) }, { :class => 'form-control' } )%>
     </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :given_date %><br>
-    <%= f.date_select :given_date %>
+    <%= f.date_select :given_date, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :loan_amount %> (Customer need to pay)<br>
-    <%= f.text_field :loan_amount %>
+    <%= f.text_field :loan_amount, class: 'form-control'%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :given_amount %> (Given amount after reducing interest)<br>
-    <%= f.text_field :given_amount %>
+    <%= f.text_field :given_amount, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :installment_amount %> (Daily pay amount )<br>
-    <%= f.text_field :installment_amount %>
+    <%= f.text_field :installment_amount, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :installments %> (How many weeks need to complete the loan)<br>
-    <%= f.number_field :installments %>
+    <%= f.number_field :installments, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :paid_amount %><br>
-    <%= f.text_field :paid_amount %>
+    <%= f.text_field :paid_amount, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :balance_amount %><br>
-    <%= f.text_field :balance_amount %>
+    <%= f.text_field :balance_amount, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :active_status %><br>
-    <%= f.check_box :active_status %>
-  </div>
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="form-group">
+          <%= f.label :active_status %>
+          <%= f.check_box :active_status %>
+        </div>
+        </div>
+      </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+        </div>
 <% end %>
