@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @loan.customer.name_location %>
+</p>
+
+<p>
+  <strong>Order no:</strong>
+  <%= @loan.order_no %>
+</p>
+
+<p>
+  <strong>Collection type:</strong>
+  <%= @loan.collection_type %>
+</p>
+
+<p>
+  <strong>Repeat day:</strong>
+  <%= @loan.repeat_day %>
+</p>
+
+<p>
+  <strong>Given date:</strong>
+  <%= @loan.given_date %>
+</p>
+
+<p>
+  <strong>Loan amount:</strong>
+  <%= @loan.loan_amount %>
+</p>
+
+<p>
+  <strong>Given amount:</strong>
+  <%= @loan.given_amount %>
+</p>
+
+<p>
+  <strong>Installment amount:</strong>
+  <%= @loan.installment_amount %>
+</p>
+
+<p>
+  <strong>Installments:</strong>
+  <%= @loan.installments %>
+</p>
+
+<p>
+  <strong>Paid amount:</strong>
+  <%= @loan.paid_amount %>
+</p>
+
+<p>
+  <strong>Balance amount:</strong>
+  <%= @loan.balance_amount %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @loan.active_status %>
+</p>
+
+<%= link_to 'Edit', edit_loan_path(@loan) %> |
+<%= link_to 'Back', loans_path %>

@@ -1,0 +1,64 @@
+<%= form_for(@loan) do |f| %>
+  <% if @loan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+      <ul>
+      <% @loan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= f.label :customer_id, :class => 'control-label' %>
+      <%= collection_select(:loan, :customer_id, @customers, :id, :name_location)%>
+    </div>
+  <div class="field">
+    <%= f.label :order_no %><br>
+    <%= f.number_field :order_no %>
+  </div>
+  <div class="field">
+    <%= f.label :collection_type %><br>
+    <%= f.number_field :collection_type %>
+  </div>
+  <div class="field">
+    <%= f.label :repeat_day %><br>
+    <%= f.number_field :repeat_day %>
+  </div>
+  <div class="field">
+    <%= f.label :given_date %><br>
+    <%= f.date_select :given_date %>
+  </div>
+  <div class="field">
+    <%= f.label :loan_amount %><br>
+    <%= f.text_field :loan_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :given_amount %><br>
+    <%= f.text_field :given_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :installment_amount %><br>
+    <%= f.text_field :installment_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :installments %><br>
+    <%= f.number_field :installments %>
+  </div>
+  <div class="field">
+    <%= f.label :paid_amount %><br>
+    <%= f.text_field :paid_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_amount %><br>
+    <%= f.text_field :balance_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :active_status %><br>
+    <%= f.check_box :active_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

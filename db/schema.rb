@@ -11,10 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630044242) do
+ActiveRecord::Schema.define(version: 20150630064501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "mobile_number"
+    t.string   "phone_number"
+    t.string   "email_id"
+    t.text     "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "customers", ["location"], name: "index_customers_on_location", using: :btree
+  add_index "customers", ["mobile_number"], name: "index_customers_on_mobile_number", using: :btree
+  add_index "customers", ["name"], name: "index_customers_on_name", using: :btree
+
+  create_table "loans", force: true do |t|
+    t.integer  "customer_id"
+    t.integer  "order_no"
+    t.integer  "loan_type"
+    t.integer  "vasool_day"
+    t.date     "given_date"
+    t.float    "loan_amount"
+    t.float    "given_amount"
+    t.float    "installment_amount"
+    t.integer  "installments"
+    t.float    "paid_amount"
+    t.float    "balance_amount"
+    t.boolean  "active_status",      default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loans", ["active_status"], name: "index_loans_on_active_status", using: :btree
+  add_index "loans", ["customer_id"], name: "index_loans_on_customer_id", using: :btree
+  add_index "loans", ["loan_type"], name: "index_loans_on_loan_type", using: :btree
+  add_index "loans", ["order_no"], name: "index_loans_on_order_no", using: :btree
+  add_index "loans", ["vasool_day"], name: "index_loans_on_vasool_day", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: ""

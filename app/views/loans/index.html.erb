@@ -1,0 +1,48 @@
+<h1>Listing loans</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Order no</th>
+      <th>Collection type</th>
+      <th>Repeat day</th>
+      <th>Given date</th>
+      <th>Loan amount</th>
+      <th>Given amount</th>
+      <th>Installment amount</th>
+      <th>Installments</th>
+      <th>Paid amount</th>
+      <th>Balance amount</th>
+      <th>Active status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.customer.name_location %></td>
+        <td><%= loan.order_no %></td>
+        <td><%= loan.collection_type %></td>
+        <td><%= loan.repeat_day %></td>
+        <td><%= loan.given_date %></td>
+        <td><%= loan.loan_amount %></td>
+        <td><%= loan.given_amount %></td>
+        <td><%= loan.installment_amount %></td>
+        <td><%= loan.installments %></td>
+        <td><%= loan.paid_amount %></td>
+        <td><%= loan.balance_amount %></td>
+        <td><%= loan.active_status %></td>
+        <td><%= link_to 'Show', loan %></td>
+        <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
+        <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Loan', new_loan_path %>
