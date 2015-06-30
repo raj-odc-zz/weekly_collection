@@ -11,39 +11,38 @@
     </div>
   <% end %>
     <div class="field">
-      <%= f.label :customer_id, :class => 'control-label' %>
+      <%= f.label :customer_id %>
       <%= collection_select(:loan, :customer_id, @customers, :id, :name_location)%>
     </div>
   <div class="field">
     <%= f.label :order_no %><br>
     <%= f.number_field :order_no %>
   </div>
-  <div class="field">
-    <%= f.label :collection_type %><br>
-    <%= f.number_field :collection_type %>
-  </div>
-  <div class="field">
-    <%= f.label :repeat_day %><br>
-    <%= f.number_field :repeat_day %>
-  </div>
+    <div class="field">
+      <%= f.label :vasool_day %>
+      <%= select(:loan,
+                 :vasool_day,
+                 Loan.vasool_day.values.map { |x| [x, Loan.vasool_day.values.index(x) + 1] },
+                 {:include_blank => "-Any-", :selected => check_for_value(@loan.vasool_day)})%>
+    </div>
   <div class="field">
     <%= f.label :given_date %><br>
     <%= f.date_select :given_date %>
   </div>
   <div class="field">
-    <%= f.label :loan_amount %><br>
+    <%= f.label :loan_amount %> (Customer need to pay)<br>
     <%= f.text_field :loan_amount %>
   </div>
   <div class="field">
-    <%= f.label :given_amount %><br>
+    <%= f.label :given_amount %> (Given amount after reducing interest)<br>
     <%= f.text_field :given_amount %>
   </div>
   <div class="field">
-    <%= f.label :installment_amount %><br>
+    <%= f.label :installment_amount %> (Daily pay amount )<br>
     <%= f.text_field :installment_amount %>
   </div>
   <div class="field">
-    <%= f.label :installments %><br>
+    <%= f.label :installments %> (How many weeks need to complete the loan)<br>
     <%= f.number_field :installments %>
   </div>
   <div class="field">

@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20150630064501) do
   add_index "loans", ["active_status"], name: "index_loans_on_active_status", using: :btree
   add_index "loans", ["customer_id"], name: "index_loans_on_customer_id", using: :btree
   add_index "loans", ["loan_type"], name: "index_loans_on_loan_type", using: :btree
-  add_index "loans", ["order_no"], name: "index_loans_on_order_no", using: :btree
+  add_index "loans", ["order_no"], name: "index_loans_on_order_no", unique: true, using: :btree
   add_index "loans", ["vasool_day"], name: "index_loans_on_vasool_day", using: :btree
 
   create_table "users", force: true do |t|

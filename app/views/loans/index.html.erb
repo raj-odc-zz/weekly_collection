@@ -6,8 +6,7 @@
     <tr>
       <th>Customer</th>
       <th>Order no</th>
-      <th>Collection type</th>
-      <th>Repeat day</th>
+      <th>Vasool day</th>
       <th>Given date</th>
       <th>Loan amount</th>
       <th>Given amount</th>
@@ -25,8 +24,8 @@
       <tr>
         <td><%= loan.customer.name_location %></td>
         <td><%= loan.order_no %></td>
-        <td><%= loan.collection_type %></td>
-        <td><%= loan.repeat_day %></td>
+
+        <td><%= loan.vasool_day %></td>
         <td><%= loan.given_date %></td>
         <td><%= loan.loan_amount %></td>
         <td><%= loan.given_amount %></td>
@@ -42,6 +41,7 @@
     <% end %>
   </tbody>
 </table>
+  </div>
 
 <br>
 

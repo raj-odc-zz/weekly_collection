@@ -15,6 +15,7 @@ class LoansController < ApplicationController
 
   def new
     @loan = Loan.new
+    @loan.order_no = Loan.last.nil? ? 1 : Loan.last.order_no.to_i + 1
     respond_with(@loan)
   end
 
@@ -42,11 +43,13 @@ class LoansController < ApplicationController
       @loan = Loan.find(params[:id])
     end
 
-  def load_customers
-    @customers = Customer.all
-  end
+    def load_customers
+      @customers = Customer.all
+    end
+
+
 
     def loan_params
-      params.require(:loan).permit(:customer_id, :order_no, :collection_type, :repeat_day, :given_date, :loan_amount, :given_amount, :installment_amount, :installments, :paid_amount, :balance_amount, :active_status)
+      params.require(:loan).permit(:customer_id, :order_no, :loan_type, :vasool_day, :given_date, :loan_amount, :given_amount, :installment_amount, :installments, :paid_amount, :balance_amount, :active_status)
     end
 end
