@@ -1,6 +1,6 @@
-<h1>Listing entry_types</h1>
-
-<table>
+<h1>Expense & Income Types</h1>
+<div class="table-responsive">
+  <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,14 +14,13 @@
       <tr>
         <td><%= entry_type.name %></td>
         <td><%= entry_type.income %></td>
-        <td><%= link_to 'Show', entry_type %></td>
         <td><%= link_to 'Edit', edit_entry_type_path(entry_type) %></td>
         <td><%= link_to 'Destroy', entry_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'New Entry type', new_entry_type_path %>

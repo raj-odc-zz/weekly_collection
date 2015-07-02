@@ -1,5 +1,5 @@
 class Customer < ActiveRecord::Base
-  has_many :loans
+  has_many :loans, dependent: :destroy
   attr_accessor :name_location
 
   def name_location

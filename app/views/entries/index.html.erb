@@ -1,6 +1,7 @@
 <h1>Listing entries</h1>
 
-<table>
+<div class="table-responsive">
+  <table class="table table-striped">
   <thead>
     <tr>
       <th>Entry type</th>
@@ -14,17 +15,17 @@
   <tbody>
     <% @entries.each do |entry| %>
       <tr>
-        <td><%= entry.entry_type %></td>
-        <td><%= entry.user %></td>
+        <td><%= entry.entry_type.name %></td>
+        <td><%= entry.user.username %></td>
         <td><%= entry.amount %></td>
         <td><%= entry.entry_date %></td>
-        <td><%= link_to 'Show', entry %></td>
         <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
         <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+  </div>
 
 <br>
 

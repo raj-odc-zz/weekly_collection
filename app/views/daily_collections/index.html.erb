@@ -14,7 +14,7 @@
     <th>Given date</th>
     <th>Loan amount</th>
     <th>Paid amount</th>
-    <th>Installments Paid</th>
+    <th>Due Weeks</th>
     <th>Balance amount</th>
     <th>Todays Amount</th>
     <th colspan="3"></th>
@@ -30,7 +30,7 @@
         <td><%= daily_collection.loan.given_date %></td>
         <td><%= daily_collection.loan.loan_amount %></td>
         <td><%= daily_collection.loan.paid_amount %></td>
-        <td><%= daily_collection.loan.installments %></td>
+        <td><%= daily_collection.loan.due_in_weeks %></td>
         <td><%= daily_collection.loan.balance_amount %></td>
         <td><%= best_in_place daily_collection, :amount, tabindex: "1" %></td>
       </tr>

@@ -1,5 +1,5 @@
 / navigation styled for Bootstrap 3.0
-nav.navbar.navbar-inverse.navbar-fixed-top
+nav.navbar.navbar-inverse.navbar-fixed-top.navbar-custom
   .container
     .navbar-header
       button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
@@ -16,8 +16,11 @@ nav.navbar.navbar-inverse.navbar-fixed-top
          li = link_to "Login", new_user_session_path
       ul.nav.navbar-nav.navbar-right
         li = link_to 'View Customer', customers_path
-        li = link_to 'View Customer', root_path
-        li = link_to 'View Customer', root_path
-        li = link_to 'View Customer', root_path
+        li = link_to 'View Party List', loans_path
+        - if BulkImport.today
+          li = link_to "View Today's Collections", daily_collections_date_path(Date.today)
+        - else
+          li = link_to 'Add New Collection', new_daily_collection_path
+        li = link_to 'View Amount in details', root_path
         li = link_to 'View Customer', root_path
 

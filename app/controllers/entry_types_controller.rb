@@ -23,17 +23,17 @@ class EntryTypesController < ApplicationController
   def create
     @entry_type = EntryType.new(entry_type_params)
     @entry_type.save
-    respond_with(@entry_type)
+    redirect_to entry_types_path
   end
 
   def update
     @entry_type.update(entry_type_params)
-    respond_with(@entry_type)
+    redirect_to entry_types_path
   end
 
   def destroy
     @entry_type.destroy
-    respond_with(@entry_type)
+    redirect_to entry_types_path
   end
 
   private

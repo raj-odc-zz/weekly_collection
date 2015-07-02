@@ -15,4 +15,5 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require best_in_place
+//= require custom
 //= require_tree .

@@ -4,6 +4,18 @@ class EntriesController < ApplicationController
 
   respond_to :html
 
+  def create
+    Entry.create(entry_params)
+    parsed_date   = Date.strptime(params[:entry][:entry_date],'%d-%m-%Y')
+    redirect_to dashboard_date_path(parsed_date)
+  end
+
+  def destroy
+    entry_record = Entry.find_by(id: params[:id])
+    entry_record.try(:destroy)
+    redirect_to dashboard_date_path(entry_record.entry_date), status: 303
+  end
+
   def index
     @entries = Entry.all
     respond_with(@entries)
@@ -19,22 +31,6 @@ class EntriesController < ApplicationController
   end
 
   def edit
-  end
-
-  def create
-    @entry = Entry.new(entry_params)
-    @entry.save
-    respond_with(@entry)
-  end
-
-  def update
-    @entry.update(entry_params)
-    respond_with(@entry)
-  end
-
-  def destroy
-    @entry.destroy
-    respond_with(@entry)
   end
 
   private

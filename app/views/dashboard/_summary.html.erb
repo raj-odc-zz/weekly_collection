@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t(:summary) %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-normal">
+      <tr>
+        <td class="bold">
+          Today's Collection
+        </td>
+        <td>
+          <%= @entries[:vasool] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">
+          <%= t(:total_incomes) %>
+        </td>
+        <td>
+          <%= @entries[:total_incomes] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">
+          Today's Adappu
+        </td>
+        <td>
+          <%= @entries[:adappu] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">
+          <%= t(:total_expenses) %>
+        </td>
+        <td>
+          <%= @entries[:total_expenses] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">
+          <%= t(:spare_amount) %>
+        </td>
+        <td>
+          <%= @entries[:balance] %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

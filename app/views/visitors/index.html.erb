@@ -21,4 +21,46 @@
       </div>
     </div>
   </div>
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Collection Details</h3>
+        <p>View customer lists. In the new page you can edit/delete customer</p>
+        <p><%= link_to "View Today's Collections", daily_collections_date_path(Date.today), class: "btn btn-default", role: "button" %>
+          <%= link_to 'Add New Collection', new_daily_collection_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Customer Details</h3>
+        <p>View customer lists. In the new page you can edit/delete customer</p>
+        <p><%= link_to 'View Customer', customers_path, class: "btn btn-default", role: "button" %>
+          <%= link_to 'Add New Customer', new_customer_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Loan Details</h3>
+        <p>View customer lists. In the new page you can edit/delete customer</p>
+        <p><%= link_to 'View Party list', loans_path, class: "btn btn-default", role: "button" %>
+          <%= link_to 'Add New Party', new_loan_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Collection Details</h3>
+        <p>View customer lists. In the new page you can edit/delete customer</p>
+        <p><%= link_to "View Today's Collections", daily_collections_date_path(Date.today), class: "btn btn-default", role: "button" %>
+          <%= link_to 'Add New Collection', new_daily_collection_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
 </div>
