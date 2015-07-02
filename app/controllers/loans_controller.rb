@@ -5,7 +5,7 @@ class LoansController < ApplicationController
   respond_to :html
 
   def index
-    @loans = Loan.all
+    @loans = Loan.all.page(params[:page])
     respond_with(@loans)
   end
 

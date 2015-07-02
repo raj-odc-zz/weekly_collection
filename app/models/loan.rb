@@ -3,6 +3,8 @@ class Loan < ActiveRecord::Base
   belongs_to :customer
   has_many :daily_collections, dependent: :destroy
 
+  paginates_per 10
+
   default_scope { order(order_no: :asc) }
 
   before_save :auto_increment

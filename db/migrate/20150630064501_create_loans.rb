@@ -6,12 +6,12 @@ class CreateLoans < ActiveRecord::Migration
       t.integer :loan_type
       t.integer :vasool_day
       t.date :given_date
-      t.float :loan_amount
-      t.float :given_amount
-      t.float :installment_amount
+      t.float :loan_amount, default: 0
+      t.float :given_amount, default: 0
+      t.float :installment_amount, default: 0
       t.integer :installments
-      t.float :paid_amount
-      t.float :balance_amount
+      t.float :paid_amount, default: 0
+      t.float :balance_amount, default: 0
       t.boolean :active_status, default: true
 
       t.timestamps

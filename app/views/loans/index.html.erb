@@ -1,5 +1,6 @@
 <h1>Listing loans</h1>
 
+<%= paginate @loans , :theme => 'twitter-bootstrap-3'%>
 <div class="table-responsive">
   <table class="table table-striped">
   <thead>
@@ -44,5 +45,5 @@
   </div>
 
 <br>
-
+<%= paginate @loans , :theme => 'twitter-bootstrap-3'%>
 <%= link_to 'New Loan', new_loan_path %>

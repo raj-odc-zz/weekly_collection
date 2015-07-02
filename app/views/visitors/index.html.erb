@@ -36,10 +36,10 @@
   <div class="col-sm-8 col-md-4">
     <div class="thumbnail">
       <div class="caption">
-        <h3>Customer Details</h3>
-        <p>View customer lists. In the new page you can edit/delete customer</p>
-        <p><%= link_to 'View Customer', customers_path, class: "btn btn-default", role: "button" %>
-          <%= link_to 'Add New Customer', new_customer_path, class: "btn btn-default", role: "button" %></p>
+        <h3>Expenses and Incomes Dashboard</h3>
+        <p>View daily expenses in this tab</p>
+        <p><%= link_to "View Today's Transactions", dashboard_date_path(Date.today), class: "btn btn-default", role: "button" %>
+          <%= link_to 'View date wise transations', dashboard_index_path, class: "btn btn-default", role: "button" %></p>
       </div>
     </div>
   </div>

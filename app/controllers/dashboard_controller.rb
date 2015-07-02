@@ -10,6 +10,11 @@ class DashboardController < ApplicationController
     end
   end
 
+  def create
+    parsed_date   = Date.strptime(params[:dashboard][:entry_date],'%d-%m-%Y')
+    redirect_to dashboard_date_path(parsed_date)
+  end
+
   def init_vars(params)
     init_types
     init_entries(params[:date]) if params
@@ -28,13 +33,16 @@ class DashboardController < ApplicationController
   def init_entries(date)
     entries = Entry.by_date(date)
     @entries = {}
-    @entries[:vasool]  = DailyCollection.total_amount(date)
-    @entries[:adappu]  = Loan.total_paid(date)
+    prev_day_transaction = Transaction.by_date(Date.parse(date) - 1).first
+    @entries[:opening_balance] = prev_day_transaction.closing_balance
+    @entries[:collection]  = DailyCollection.total_amount(date)
+    @entries[:new_loan]  = Loan.total_paid(date)
     @entries[:incomes] = entries.incomes
     @entries[:expenses] = entries.expenses
     @entries[:total_incomes] = entries.incomes.total_amount
     @entries[:total_expenses] = entries.expenses.total_amount
-    @entries[:balance] = (@entries[:total_incomes] + @entries[:vasool]) - @entries[:total_expenses]
+    @entries[:closing_balance] = (@entries[:opening_balance] + @entries[:total_incomes] + @entries[:collection]) - (@entries[:new_loan] + @entries[:total_expenses])
+    Transaction.create_update(date, @entries)
   end
 
   def init_previous_day_entries()

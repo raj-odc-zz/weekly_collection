@@ -4,7 +4,8 @@ class DailyCollectionsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @daily_collections = DailyCollection.where(collection_date: params[:date]).includes(:loan).order("loans.order_no ASC")
+    @daily_collections = DailyCollection.where(collection_date: params[:date]).
+        includes(:loan).order("loans.order_no ASC").page(params[:page])
     respond_with(@daily_collections)
   end
 

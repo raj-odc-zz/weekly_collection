@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630104616) do
+ActiveRecord::Schema.define(version: 20150702122652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,20 @@ ActiveRecord::Schema.define(version: 20150630104616) do
   add_index "loans", ["loan_type"], name: "index_loans_on_loan_type", using: :btree
   add_index "loans", ["order_no"], name: "index_loans_on_order_no", unique: true, using: :btree
   add_index "loans", ["vasool_day"], name: "index_loans_on_vasool_day", using: :btree
+
+  create_table "transactions", force: true do |t|
+    t.float    "opening_balance",   default: 0.0
+    t.float    "collection_amount", default: 0.0
+    t.float    "other_income",      default: 0.0
+    t.float    "new_loan",          default: 0.0
+    t.float    "other_expenses",    default: 0.0
+    t.float    "closing_balance",   default: 0.0
+    t.date     "entry_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transactions", ["entry_date"], name: "index_transactions_on_entry_date", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: ""

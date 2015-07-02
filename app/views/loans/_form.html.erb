@@ -28,7 +28,7 @@
     </div>
   <div class="form-group">
     <%= f.label :given_date %><br>
-    <%= f.date_select :given_date, class: 'form-control' %>
+    <%= f.text_field :given_date, :class => 'datepicker', :value => Date.today.strftime('%d-%m-%Y') %>
   </div>
   <div class="form-group">
     <%= f.label :loan_amount %> (Customer need to pay)<br>

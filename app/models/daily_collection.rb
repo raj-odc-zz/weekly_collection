@@ -2,6 +2,8 @@ class DailyCollection < ActiveRecord::Base
   belongs_to :loan
   belongs_to :user
 
+  paginates_per 10
+
   #default_scope { includes(:loan).order("loans.order_no ASC") }
 
   def balance_correction(params_amount)

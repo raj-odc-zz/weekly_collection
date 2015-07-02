@@ -1,6 +1,14 @@
 <div class="page-header">
   <h1>Dashboard</h1>
 </div>
+<%= form_for :dashboard, html: {class: 'form col-md-6 col-md-offset-3'} do |f| %>
+    <%= f.text_field :entry_date, :class => 'datepicker', :value => Date.today.strftime('%d-%m-%Y') %>
+    <%= submit_tag 'Generate', class: 'btn btn-default btn-sm' %>
+<% end %>
+<div>&nbsp;</div>
+<div><br/></div>
+<div><br/></div>
+<%if params[:date]%>
 <div class="row">
   <div class="col-md-6">
     <%= render 'entries', kind: 'expense' %>
@@ -8,6 +16,6 @@
   </div>
   <div class="col-md-6">
     <%= render 'summary' %>
-    <%= render 'chart' %>
   </div>
 </div>
+<%end%>

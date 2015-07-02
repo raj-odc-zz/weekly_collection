@@ -1,4 +1,10 @@
-<h1>Listing customers</h1>
+<h1>Customers</h1>
+
+<%= form_tag(customers_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search_name, params[:search_name], placeholder: "Search Customers with Name" %>
+    <%= text_field_tag :search_location, params[:search_location], placeholder: "Search Customers with Location" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
 <div class="table-responsive">
   <table class="table table-striped">
   <thead>

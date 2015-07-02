@@ -4,7 +4,15 @@ class CustomersController < ApplicationController
   respond_to :html
 
   def index
-    @customers = Customer.all
+    if !params[:search_name].blank? && !params[:search_location].blank?
+      @customers = Customer.search_name_location(params[:search_name]).order("created_at DESC")
+      elsif !params[:search_name].blank?
+      @customers = Customer.search_by_name(params[:search_name]).order("created_at DESC")
+    elsif params[:search_location]
+      @customers = Customer.search_by_location(params[:search_location]).order("created_at DESC")
+    else
+      @customers = Customer.all.order('created_at DESC')
+    end
     respond_with(@customers)
   end
 

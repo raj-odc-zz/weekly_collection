@@ -4,7 +4,7 @@
     });
 </script>
 <h1>Listing daily_collections</h1>
-
+<%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%>
 <div class="table-responsive">
 <table class="table table-striped">
   <thead>
@@ -42,3 +42,5 @@
 <br>
 
 <%= link_to 'New Daily collection', new_daily_collection_path %>
+
+<%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%>

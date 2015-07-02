@@ -8,15 +8,27 @@
     <table class="table table-normal">
       <tr>
         <td class="bold">
+          <b>Opening Balance</b>
+        </td>
+        <td>
+          <%= @entries[:opening_balance] %>
+        </td>
+      </tr>
+    </table>
+    </div>
+  <div class="panel-body">
+    <table class="table table-normal">
+      <tr>
+        <td class="bold">
           Today's Collection
         </td>
         <td>
-          <%= @entries[:vasool] %>
+          <%= @entries[:collection] %>
         </td>
       </tr>
       <tr>
         <td class="bold">
-          <%= t(:total_incomes) %>
+           Other Incomes
         </td>
         <td>
           <%= @entries[:total_incomes] %>
@@ -24,10 +36,19 @@
       </tr>
       <tr>
         <td class="bold">
-          Today's Adappu
+          Total Incomes without opening balance
         </td>
         <td>
-          <%= @entries[:adappu] %>
+          = (<%= (@entries[:total_incomes] + @entries[:collection]) %>)
+        </td>
+      </tr>
+
+      <tr>
+        <td class="bold">
+          Today's New Loan
+        </td>
+        <td>
+          <%= @entries[:new_loan] %>
         </td>
       </tr>
       <tr>
@@ -40,12 +61,25 @@
       </tr>
       <tr>
         <td class="bold">
-          <%= t(:spare_amount) %>
+          Total Expenses
         </td>
         <td>
-          <%= @entries[:balance] %>
+          = (<%= (@entries[:new_loan] + @entries[:total_expenses]) %>)
         </td>
       </tr>
     </table>
   </div>
+      <div class="panel-body">
+        <table class="table table-normal">
+          <tr>
+            <td class="bold">
+              <b>Closing balance</b>
+            </td>
+            <td>
+              <%= @entries[:closing_balance] %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
 </div>
