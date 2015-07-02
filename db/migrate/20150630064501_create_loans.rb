@@ -9,7 +9,7 @@ class CreateLoans < ActiveRecord::Migration
       t.float :loan_amount, default: 0
       t.float :given_amount, default: 0
       t.float :installment_amount, default: 0
-      t.integer :installments
+      t.integer :installments, default: 0
       t.float :paid_amount, default: 0
       t.float :balance_amount, default: 0
       t.boolean :active_status, default: true
