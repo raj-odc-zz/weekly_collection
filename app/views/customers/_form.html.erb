@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
   <div class="field">
     <%= f.label :location %><br>
-    <%= f.text_field :location %>
+    <%= f.text_field :location, required: true %>
   </div>
   <div class="field">
     <%= f.label :mobile_number %><br>
-    <%= f.text_field :mobile_number %>
+    <%= f.text_field :mobile_number, required: true %>
   </div>
   <div class="field">
     <%= f.label :phone_number %><br>
@@ -36,6 +36,6 @@
     <%= f.text_area :address %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-info" %>
   </div>
 <% end %>

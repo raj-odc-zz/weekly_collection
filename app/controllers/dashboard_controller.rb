@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
-  skip_before_filter :authenticate_user!
+  include ApplicationHelper
 
+  respond_to :html, :json, :pdf
   def index
     if current_user
       init_vars(params)
@@ -19,6 +20,18 @@ class DashboardController < ApplicationController
     init_types
     init_entries(params[:date]) if params
     init_new_entry
+  end
+
+  def report
+    @loans = Loan.send(get_next_dayname)
+
+    respond_to do |format|
+      format.pdf do
+        pdf = NextdayReport.new(@loans)
+        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+      end
+    end
+
   end
 
   private

@@ -14,14 +14,14 @@
     <div class="fieldset">
       <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name , required: true%>
   </div>
       <div class="form-group">
     <%= f.label :income %><br>
     <%= f.check_box :income %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-info" %>
   </div>
         </div>
 <% end %>

@@ -4,14 +4,10 @@ class CustomersController < ApplicationController
   respond_to :html
 
   def index
-    if !params[:search_name].blank? && !params[:search_location].blank?
-      @customers = Customer.search_name_location(params[:search_name]).order("created_at DESC")
-      elsif !params[:search_name].blank?
-      @customers = Customer.search_by_name(params[:search_name]).order("created_at DESC")
-    elsif params[:search_location]
-      @customers = Customer.search_by_location(params[:search_location]).order("created_at DESC")
+    if params[:active]
+      load_customers('inactive')
     else
-      @customers = Customer.all.order('created_at DESC')
+      load_customers('active')
     end
     respond_with(@customers)
   end
@@ -31,20 +27,33 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     @customer.save
-    respond_with(@customer)
+    redirect_to customers_path
   end
 
   def update
     @customer.update(customer_params)
-    respond_with(@customer)
+    redirect_to customers_path
   end
 
   def destroy
-    @customer.destroy
+    @customer.update(:active_status => false)
     respond_with(@customer)
   end
 
   private
+
+    def load_customers(active_status)
+      if !params[:search_name].blank? && !params[:search_location].blank?
+        @customers = Customer.search_name_location(params[:search_name]).order("created_at DESC").send(active_status).page(params[:page])
+      elsif !params[:search_name].blank?
+        @customers = Customer.search_name(params[:search_name]).order("created_at DESC").send(active_status).page(params[:page])
+      elsif params[:search_location]
+        @customers = Customer.search_location(params[:search_location]).order("created_at DESC").send(active_status).page(params[:page])
+      else
+        @customers = Customer.all.order('created_at DESC').send(active_status).page(params[:page])
+      end
+    end
+
     def set_customer
       @customer = Customer.find(params[:id])
     end

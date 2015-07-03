@@ -14,8 +14,8 @@
       <tr>
         <td><%= entry_type.name %></td>
         <td><%= entry_type.income %></td>
-        <td><%= link_to 'Edit', edit_entry_type_path(entry_type) %></td>
-        <td><%= link_to 'Destroy', entry_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_entry_type_path(entry_type), class: "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', entry_type, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +23,4 @@
 </div>
 <br>
 
-<%= link_to 'New Entry type', new_entry_type_path %>
+<%= link_to 'New Entry type', new_entry_type_path, class: "btn btn-info" %>

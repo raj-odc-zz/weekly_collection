@@ -5,7 +5,11 @@ class LoansController < ApplicationController
   respond_to :html
 
   def index
-    @loans = Loan.all.page(params[:page])
+      if params[:active]
+        load_loans('inactive')
+      else
+        load_loans('active')
+      end
     respond_with(@loans)
   end
 
@@ -25,20 +29,33 @@ class LoansController < ApplicationController
   def create
     @loan = Loan.new(loan_params)
     @loan.save
-    respond_with(@loan)
+    redirect_to loans_path
   end
 
   def update
     @loan.update(loan_params)
-    respond_with(@loan)
+    redirect_to loans_path
   end
 
   def destroy
-    @loan.destroy
+    @loan.update_columns(:active_status => false)
     respond_with(@loan)
   end
 
   private
+
+    def load_loans(active_status)
+      if !params[:search_name].blank? && params[:loan] && !params[:loan][:search_day].blank?
+        @loans = Loan.search_name_day(params[:search_name], params[:loan][:search_day]).page(params[:page]).send(active_status)
+      elsif !params[:search_name].blank?
+        @loans = Loan.search_name(params[:search_name]).page(params[:page]).send(active_status)
+      elsif params[:loan] && !params[:loan][:search_day].blank?
+        @loans = Loan.send(params[:loan][:search_day]).page(params[:page]).send(active_status)
+      else
+        @loans = Loan.all.page(params[:page]).send(active_status)
+      end
+    end
+
     def set_loan
       @loan = Loan.find(params[:id])
     end

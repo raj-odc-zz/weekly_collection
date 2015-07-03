@@ -1,12 +1,74 @@
-<script>
-    $(document).ready(function() {
-        jQuery(".best_in_place").best_in_place();
-    });
-</script>
-<h1>Listing daily_collections</h1>
-<%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%>
+<style>
+    .best_in_place {
+        padding: .1m;
+        cursor: hand;
+        cursor: pointer;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        border-radius: 5px;
+    }
+    .best_in_place:hover, #user_account .do_hover {
+        padding-right: 1.5em;
+        background: url(<%= asset_path "red_pen.png" %>) no-repeat right;
+        background-color: #CCC;
+    }
+    .info_edit {
+        float: right;
+        cursor: hand;
+        cursor: pointer;
+    }
+
+    /* Missatges Flotants */
+
+    .purr {
+        position: fixed;
+        width: 324px;
+        top: 20px;
+        right: 15px;
+        padding: 20px;
+        background-color: #000000;
+        color: #FFFFFF;
+        border: 2px solid #AAA;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -o-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .purr:hover .close  {
+        position: absolute;
+        top: 5px;
+        right: 3px;
+        display: block;
+        width: 25px;
+        height: 25px;
+        text-indent: -9999px;
+        background: url("/images/close-button.gif") no-repeat;
+    }
+
+    .css_class {
+        background:darkgray;
+    }
+</style>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-8"><h1>Collection List</h1></div>
+  <div class="col-xs-6 col-md-4"><%= link_to "Generate Today's Collection Report",  daily_collections_date_path(:date => Date.today, format: :pdf), class: "btn btn-default" %></div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4">Total Parties = <%= @daily_collections.total_count%></div>
+</div>
+
+
 <div class="table-responsive">
-<table class="table table-striped">
+<table class="table table-bordered">
   <thead>
   <tr>
     <th>Customer</th>
@@ -16,12 +78,9 @@
     <th>Paid amount</th>
     <th>Due Weeks</th>
     <th>Balance amount</th>
-    <th>Todays Amount</th>
-    <th colspan="3"></th>
+    <th style="width: 20%">Today's Amount</th>
   </tr>
   </thead>
-
-
   <tbody>
     <% @daily_collections.each do |daily_collection| %>
       <tr>
@@ -32,15 +91,17 @@
         <td><%= daily_collection.loan.paid_amount %></td>
         <td><%= daily_collection.loan.due_in_weeks %></td>
         <td><%= daily_collection.loan.balance_amount %></td>
-        <td><%= best_in_place daily_collection, :amount, tabindex: "1" %></td>
+        <td style="width: 20%"><%= best_in_place daily_collection, :amount,
+                                                 :nil => "Click me to add amount!" ,
+                              :data => {:user_name => daily_collection.loan.balance_amount} %>
+          </td>
       </tr>
     <% end %>
   </tbody>
 </table>
   </div>
 
-<br>
-
-<%= link_to 'New Daily collection', new_daily_collection_path %>
-
-<%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%>
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4"><%= link_to 'New Daily collection', new_daily_collection_path, class: "btn btn-default" %></div>
+</div>

@@ -9,6 +9,8 @@ class Loan < ActiveRecord::Base
 
   before_save :auto_increment
   before_create :auto_increment
+  before_save  :update_balance
+  before_create :update_balance
 
   enumerize :loan_type,
             in: {Weekly: 1,
@@ -17,6 +19,11 @@ class Loan < ActiveRecord::Base
 
   scope :weekly, -> { with_loan_type :Weekly }
   scope :daily, -> { with_loan_type :Daily }
+
+  scope :active, -> { where(:active_status => true) }
+  scope :inactive, -> { where(:active_status => false) }
+
+  scope :customer_name, ->(name) { joins(:customer).where('lower(customers.name) like ?', "%#{name.downcase}%") }
 
   enumerize :vasool_day,
             in: {Sunday: 1,
@@ -36,12 +43,14 @@ class Loan < ActiveRecord::Base
   scope :friday, -> { with_vasool_day :Friday }
   scope :saturday, -> { with_vasool_day :Saturday }
 
-  def auto_increment
-    loan = Loan.find_by_order_no(order_no)
-    if loan && loan!=self
-      @loan_all = Loan.where("order_no >= #{self.order_no}")
-      @loan_all.each {|loan| loan.update_attribute(:order_no, loan.order_no+1)}
-    end
+
+  def self.search_name_day(query, day)
+    customer_name(query).send(day)
+  end
+
+  def self.search_name(query)
+
+    customer_name(query)
   end
 
   def update_balance_amount(balance)
@@ -60,5 +69,18 @@ class Loan < ActiveRecord::Base
 
   def self.total_paid(date)
     where(:given_date => date).map(&:given_amount).reduce(:+) || 0
+  end
+
+
+  def auto_increment
+    loan = Loan.find_by_order_no(order_no)
+    if loan && loan!=self
+      @loan_all = Loan.where("order_no >= #{self.order_no}")
+      @loan_all.each {|loan| loan.update_attribute(:order_no, loan.order_no+1)}
+    end
+  end
+
+  def update_balance
+    self.balance_amount = self.loan_amount - self.paid_amount
   end
 end

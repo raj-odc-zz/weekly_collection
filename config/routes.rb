@@ -15,13 +15,17 @@ Rails.application.routes.draw do
 
   resources :loans
 
+
   resources :customers
 
   get "dashboard/(:date)" => "dashboard#index",
       :constraints => { :date => /\d{4}-\d{2}-\d{2}/ },
       :as => "dashboard_date"
 
+  get "dashboard/report" => "dashboard#report"
+
   resources :dashboard, only: [:index, :create]
+
   devise_for :users
   devise_scope :user do
     authenticated :user do

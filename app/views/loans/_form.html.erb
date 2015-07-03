@@ -13,18 +13,18 @@
     <div class="fieldset">
     <div class="form-group">
       <%= f.label :customer_id %>
-      <%= collection_select(:loan, :customer_id, @customers, :id, :name_location, class: 'form-control')%>
+      <%= collection_select(:loan, :customer_id, @customers, :id, :name_location, class: 'form-control', required: true)%>
     </div>
   <div class="form-group">
     <%= f.label :order_no %><br>
     <%= f.number_field :order_no, class: 'form-control' %>
   </div>
     <div class="form-group">
-      <%= f.label :vasool_day %>
+      <%= f.label :collection_day %>
       <%= select(:loan,
                  :vasool_day,
                  Loan.vasool_day.values.map { |x| [x, Loan.vasool_day.values.index(x) + 1] },
-                 { :include_blank => "-Any-", :selected => check_for_value(@loan.vasool_day) }, { :class => 'form-control' } )%>
+                 { :include_blank => "-Any-", :selected => check_for_value(@loan.vasool_day) }, { :class => 'form-control', required: true } )%>
     </div>
   <div class="form-group">
     <%= f.label :given_date %><br>
@@ -32,27 +32,23 @@
   </div>
   <div class="form-group">
     <%= f.label :loan_amount %> (Customer need to pay)<br>
-    <%= f.text_field :loan_amount, class: 'form-control'%>
+    <%= f.text_field :loan_amount, class: 'form-control', required: true%>
   </div>
   <div class="form-group">
     <%= f.label :given_amount %> (Given amount after reducing interest)<br>
-    <%= f.text_field :given_amount, class: 'form-control' %>
+    <%= f.text_field :given_amount, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :installment_amount %> (Daily pay amount )<br>
-    <%= f.text_field :installment_amount, class: 'form-control' %>
+    <%= f.text_field :installment_amount, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :installments %> (How many weeks need to complete the loan)<br>
-    <%= f.number_field :installments, class: 'form-control' %>
+    <%= f.number_field :installments, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label :paid_amount %><br>
     <%= f.text_field :paid_amount, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :balance_amount %><br>
-    <%= f.text_field :balance_amount, class: 'form-control' %>
   </div>
       <div class="col-sm-offset-2 col-sm-10">
         <div class="form-group">
@@ -62,7 +58,7 @@
         </div>
       </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  class: "btn btn-default" %>
   </div>
         </div>
 <% end %>

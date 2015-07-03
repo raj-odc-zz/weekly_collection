@@ -1,0 +1,43 @@
+
+<h1>Daily_collections</h1>
+<style type="text/css">
+    table {
+        display: table;
+        border-collapse: none;
+        border-spacing: 0px;
+        border-color: gray;
+    }
+</style>
+
+  <table border="1">
+  <tr>
+    <th>Customer</th>
+    <th>Mobile Number</th>
+    <th>Given date</th>
+    <th>Loan amount</th>
+    <th>Due Weeks</th>
+    <th>Balance amount</th>
+    <%if params[:date] == Date.today.strftime("%Y-%m-%d")%>
+        <th>Today's amount</th>
+    <%end%>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @daily_collections.each do |daily_collection| %>
+      <tr>
+        <td><%= daily_collection.loan.customer.name_location %></td>
+        <td><%= daily_collection.loan.customer.mobile_number %></td>
+        <td><%= daily_collection.loan.given_date %></td>
+        <td><%= daily_collection.loan.loan_amount %></td>
+        <td><%= daily_collection.loan.due_in_weeks %></td>
+        <td><%= daily_collection.loan.balance_amount %></td>
+        <%if params[:date] == Date.today.strftime("%Y-%m-%d")%>
+        <td><%= daily_collection.amount %></td>
+            <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

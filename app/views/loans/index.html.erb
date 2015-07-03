@@ -1,8 +1,25 @@
-<h1>Listing loans</h1>
+<h1>Parties List</h1>
+<br/>
 
-<%= paginate @loans , :theme => 'twitter-bootstrap-3'%>
+<%= form_tag(loans_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search_name, params[:search_name], placeholder: "Search Customers with Name" %>
+    <%= select('loan','search_day',
+               Loan.vasool_day.values.map { |x| [x, Loan.vasool_day.values.index(x) + 1, x.downcase] },
+               { :include_blank => "-All-", :selected => check_for_params(params[:loan]) }, {} )%>
+    <%= submit_tag "Sort by Collection Day", :name => nil, class: "btn btn-info" %>
+<% end %>
+
+<%= form_tag(loans_path, :method => "get", id: "search-form", html: { class: 'form col-md-6 col-md-offset-3' }) do %>
+    <%= hidden_field_tag :active %>
+    <%= submit_tag "View Old Parties", :name => nil, class: "btn btn-default" %>
+<% end %>
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @loans , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4">Total Loans = <%= @loans.total_count%></div>
+</div>
+
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-bordered">
   <thead>
     <tr>
       <th>Customer</th>
@@ -15,7 +32,6 @@
       <th>Installments</th>
       <th>Paid amount</th>
       <th>Balance amount</th>
-      <th>Active status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,16 +50,16 @@
         <td><%= loan.installments %></td>
         <td><%= loan.paid_amount %></td>
         <td><%= loan.balance_amount %></td>
-        <td><%= loan.active_status %></td>
-        <td><%= link_to 'Show', loan %></td>
-        <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
-        <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_loan_path(loan), class: "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
   </div>
 
-<br>
-<%= paginate @loans , :theme => 'twitter-bootstrap-3'%>
-<%= link_to 'New Loan', new_loan_path %>
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @loans , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4"><%= link_to 'New Loan', new_loan_path, class: "btn btn-info" %></div>
+</div>
+

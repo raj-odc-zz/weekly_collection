@@ -16,11 +16,11 @@ nav.navbar.navbar-inverse.navbar-fixed-top.navbar-custom
          li = link_to "Login", new_user_session_path
       ul.nav.navbar-nav.navbar-right
         li = link_to 'View Customer', customers_path
-        li = link_to 'View Party List', loans_path
+        li = link_to 'View Party List', "/loans?loan[search_day]=#{(Date.today).strftime("%A").downcase}"
         - if BulkImport.today
           li = link_to "View Today's Collections", daily_collections_date_path(Date.today)
         - else
           li = link_to 'Add New Collection', new_daily_collection_path
-        li = link_to 'View Amount in details', root_path
-        li = link_to 'View Customer', root_path
+        li = link_to 'View Amount in details', dashboard_date_path(Date.today)
+        li = link_to 'Generate Next Day Report',  daily_collections_date_path(:date => Date.today+1, format: :pdf)
 

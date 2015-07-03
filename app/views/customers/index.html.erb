@@ -1,10 +1,19 @@
 <h1>Customers</h1>
 
-<%= form_tag(customers_path, :method => "get", id: "search-form") do %>
+<%= form_tag(customers_path, :method => "get", id: "search-form", html: { class: 'form col-md-6 col-md-offset-3' }) do %>
     <%= text_field_tag :search_name, params[:search_name], placeholder: "Search Customers with Name" %>
     <%= text_field_tag :search_location, params[:search_location], placeholder: "Search Customers with Location" %>
-    <%= submit_tag "Search", :name => nil %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-info" %>
 <% end %>
+
+<%= form_tag(customers_path, :method => "get", id: "search-form", html: { class: 'form col-md-6 col-md-offset-3' }) do %>
+    <%= hidden_field_tag :active %>
+    <%= submit_tag "View Old Customer", :name => nil, class: "btn btn-default" %>
+<% end %>
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @customers , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4">Total Customers = <%= @customers.total_count%></div>
+</div>
 <div class="table-responsive">
   <table class="table table-striped">
   <thead>
@@ -12,9 +21,6 @@
       <th>Name</th>
       <th>Location</th>
       <th>Mobile number</th>
-      <th>Phone number</th>
-      <th>Email</th>
-      <th>Address</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,17 +31,17 @@
         <td><%= customer.name %></td>
         <td><%= customer.location %></td>
         <td><%= customer.mobile_number %></td>
-        <td><%= customer.phone_number %></td>
-        <td><%= customer.email_id %></td>
-        <td><%= customer.address %></td>
-        <td><%= link_to 'Show', customer %></td>
-        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', customer, class: "btn btn-default" %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer), class: "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
-<br>
+<div class="row">
+  <div class="col-xs-12 col-md-8"><%= paginate @customers , :theme => 'twitter-bootstrap-3'%></div>
+  <div class="col-xs-6 col-md-4"><%= link_to 'New Customer', new_customer_path, class: "btn btn-info" %></div>
+</div>
 
-<%= link_to 'New Customer', new_customer_path %>
+
