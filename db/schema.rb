@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150703073004) do
 
   create_table "daily_collections", force: true do |t|
     t.integer  "loan_id"
-    t.float    "amount"
+    t.float    "amount",          default: 0.0
     t.date     "collection_date"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150703073004) do
   create_table "entries", force: true do |t|
     t.integer  "entry_type_id"
     t.integer  "user_id"
-    t.float    "amount"
+    t.float    "amount",        default: 0.0
     t.date     "entry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -79,12 +79,12 @@ ActiveRecord::Schema.define(version: 20150703073004) do
     t.integer  "loan_type"
     t.integer  "vasool_day"
     t.date     "given_date"
-    t.float    "loan_amount"
-    t.float    "given_amount"
-    t.float    "installment_amount"
-    t.integer  "installments"
-    t.float    "paid_amount"
-    t.float    "balance_amount"
+    t.float    "loan_amount",        default: 0.0
+    t.float    "given_amount",       default: 0.0
+    t.float    "installment_amount", default: 0.0
+    t.integer  "installments",       default: 0
+    t.float    "paid_amount",        default: 0.0
+    t.float    "balance_amount",     default: 0.0
     t.boolean  "active_status",      default: true
     t.datetime "created_at"
     t.datetime "updated_at"
