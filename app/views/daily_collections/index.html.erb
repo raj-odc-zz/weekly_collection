@@ -58,7 +58,7 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-8"><h1>Collection List</h1></div>
-  <div class="col-xs-6 col-md-4"><%= link_to "Generate Today's Collection Report",  daily_collections_date_path(:date => Date.today, format: :pdf), class: "btn btn-default" %></div>
+  <div class="col-xs-6 col-md-4"><%= link_to "Generate Today's Collection Report",  daily_collections_date_path(params[:date], format: :pdf), class: "btn btn-default" %></div>
 </div>
 
 <div class="row">

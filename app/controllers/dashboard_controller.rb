@@ -18,20 +18,8 @@ class DashboardController < ApplicationController
 
   def init_vars(params)
     init_types
-    init_entries(params[:date]) if params
+    init_entries(params[:date]) if params[:date]
     init_new_entry
-  end
-
-  def report
-    @loans = Loan.send(get_next_dayname)
-
-    respond_to do |format|
-      format.pdf do
-        pdf = NextdayReport.new(@loans)
-        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
-      end
-    end
-
   end
 
   private

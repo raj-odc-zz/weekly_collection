@@ -22,8 +22,8 @@ gem 'best_in_place', '~> 3.0.1'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'tzinfo-data'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'prawn', '~> 1.2.1'
+gem 'prawn-table', '~> 0.1.0'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

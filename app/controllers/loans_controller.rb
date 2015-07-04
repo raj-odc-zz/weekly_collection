@@ -14,7 +14,13 @@ class LoansController < ApplicationController
   end
 
   def show
-    respond_with(@loan)
+    respond_with(@loan) do |format|
+      format.pdf do
+        pdf = Report::LoanPaidReport.new.print_report(@loan)
+        send_data pdf.render, filename: "#{@loan.customer.name_location}_loan_report.pdf", type: 'application/pdf'
+      end
+      format.html
+    end
   end
 
   def new

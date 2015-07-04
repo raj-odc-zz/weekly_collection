@@ -50,6 +50,7 @@
         <td><%= loan.installments %></td>
         <td><%= loan.paid_amount %></td>
         <td><%= loan.balance_amount %></td>
+        <td><%= link_to 'Show', loan %></td>
         <td><%= link_to 'Edit', edit_loan_path(loan), class: "btn btn-default" %></td>
         <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
       </tr>

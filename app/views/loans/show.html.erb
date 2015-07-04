@@ -1,59 +1,60 @@
-<p id="notice"><%= notice %></p>
+<h2>Collection Date wise List</h2>
+<br/>
+<div class="row">
+  <div class="col-md-6"></div>
+  <div class="col-md-6"><%= link_to 'Back', loans_path, class: "btn btn-info" %>&nbsp;
+    <%= link_to 'Print Report', loan_path(@loan, format: :pdf), class: "btn btn-info" %></div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <table>
+      <tbody>
+      <tr>
+        <th>Customer Name:
+        </td>
+        <td>&nbsp;<%= @loan.customer.name_location %></td>
+      </tr>
+      <tr>
+        <th>Loan Given date:
+        </td>
+        <td>&nbsp;<%= date_format_view(@loan.given_date) %></td>
+      </tr>
+      <tr>
+        <th>Loan Amount:
+        </td>
+        <td>&nbsp;<%= @loan.loan_amount %></td>
+      </tr>
+      <tr>
+        <th>Loan Paid Amount:
+        </td>
+        <td>&nbsp;<%= @loan.paid_amount %></td>
+      </tr>
+      <tr>
+        <th>Balance Amount:
+        </td>
+        <td>&nbsp;<%= @loan.balance_amount %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br/>
+<div class="col-sm-3">
+  <table class="table table-bordered table-stripped">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+    </tr>
+    </thead>
 
-<p>
-  <strong>Customer:</strong>
-  <%= @loan.customer.name_location %>
-</p>
-
-<p>
-  <strong>Order no:</strong>
-  <%= @loan.order_no %>
-</p>
-
-<p>
-  <strong>Vasool day:</strong>
-  <%= @loan.vasool_day %>
-</p>
-
-<p>
-  <strong>Given date:</strong>
-  <%= @loan.given_date %>
-</p>
-
-<p>
-  <strong>Loan amount:</strong>
-  <%= @loan.loan_amount %>
-</p>
-
-<p>
-  <strong>Given amount:</strong>
-  <%= @loan.given_amount %>
-</p>
-
-<p>
-  <strong>Installment amount:</strong>
-  <%= @loan.installment_amount %>
-</p>
-
-<p>
-  <strong>Installments:</strong>
-  <%= @loan.installments %>
-</p>
-
-<p>
-  <strong>Paid amount:</strong>
-  <%= @loan.paid_amount %>
-</p>
-
-<p>
-  <strong>Balance amount:</strong>
-  <%= @loan.balance_amount %>
-</p>
-
-<p>
-  <strong>Active status:</strong>
-  <%= @loan.active_status %>
-</p>
-
-<%= link_to 'Edit', edit_loan_path(@loan) %> |
-<%= link_to 'Back', loans_path %>
+    <tbody>
+    <% @loan.daily_collections.each do |loan| %>
+        <tr>
+          <td><%= loan.date_with_name %></td>
+          <td><%= loan.amount %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

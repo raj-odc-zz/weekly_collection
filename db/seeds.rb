@@ -5,6 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-#User.create({ username: 'user1', password: 'password' })
+User.create({ username: 'admin', password: 'password' })
 
 Transaction.create({ closing_balance: '0', entry_date: Date.today-1 })

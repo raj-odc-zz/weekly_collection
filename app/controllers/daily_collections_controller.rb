@@ -7,7 +7,10 @@ class DailyCollectionsController < ApplicationController
     respond_with(@daily_collections) do |format|
       format.pdf do
         @daily_collections = DailyCollection.date_wise_report(params[:date])
-        render  :pdf => "#{params[:date].to_s}_collection_details.pdf", :template => 'daily_collections/index.pdf.erb'
+        pdf = Report::CollectionReport.new.print_report(@daily_collections, params[:date])
+        send_data pdf.render,
+                  filename: "Collection_Report_On_#{params[:date]}",
+                  type: 'application/pdf'
       end
       @daily_collections = DailyCollection.date_wise_report(params[:date]).page(params[:page]).per(10)
       format.html
@@ -44,7 +47,6 @@ class DailyCollectionsController < ApplicationController
 
   def update
     @daily_collection = @daily_collection.balance_correction(params[:daily_collection][:amount])
-    puts "@daily_collection",@daily_collection.inspect,@daily_collection.loan.balance_amount
     respond_with(@daily_collection)
   end
 
