@@ -1,0 +1,1 @@
+$(function(){$(".datepicker").datepicker({format:"dd-mm-yyyy",orientation:"top right",todayHighlight:!1,autoclose:!0})}),$(document).ready(function(){jQuery(".best_in_place").best_in_place()});

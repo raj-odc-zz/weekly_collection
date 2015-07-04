@@ -39,7 +39,7 @@
   <tbody>
     <% @loans.each do |loan| %>
       <tr>
-        <td><%= loan.customer.name_location %></td>
+        <td><b></b><%= link_to loan.customer.name_location, loan %></b></td>
         <td><%= loan.order_no %></td>
 
         <td><%= loan.vasool_day %></td>
