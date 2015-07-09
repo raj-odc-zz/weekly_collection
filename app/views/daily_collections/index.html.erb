@@ -12,7 +12,7 @@
     }
     .best_in_place:hover, #user_account .do_hover {
         padding-right: 1.5em;
-        background: url(<%= asset_path "red_pen.png" %>) no-repeat right;
+        background: url(<%= asset_path "red_pen.jpeg" %>) no-repeat right;
         background-color: #CCC;
     }
     .info_edit {
@@ -61,11 +61,13 @@
   <div class="col-xs-6 col-md-4"><%= link_to "Generate Today's Collection Report",  daily_collections_date_path(params[:date], format: :pdf), class: "btn btn-default" %></div>
 </div>
 
+
 <div class="row">
-  <div class="col-xs-12 col-md-8"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
-  <div class="col-xs-6 col-md-4">Total Parties = <%= @daily_collections.total_count%></div>
+  <div class="col-xs-12 col-md-8"></div>
+  <div class="col-xs-6 col-md-4"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
 </div>
 
+Total Parties = <%= @daily_collections.total_count%>
 
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -101,7 +103,10 @@
 </table>
   </div>
 
+
 <div class="row">
-  <div class="col-xs-12 col-md-8"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
-  <div class="col-xs-6 col-md-4"><%= link_to 'New Daily collection', new_daily_collection_path, class: "btn btn-default" %></div>
+  <div class="col-xs-12 col-md-8"></div>
+  <div class="col-xs-6 col-md-4"><%= paginate @daily_collections , :theme => 'twitter-bootstrap-3'%></div>
 </div>
+
+<%= link_to 'New Daily collection', new_daily_collection_path, class: "btn btn-default" %>

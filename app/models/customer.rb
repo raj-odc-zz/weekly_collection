@@ -2,7 +2,7 @@ class Customer < ActiveRecord::Base
   has_many :loans, dependent: :destroy
   attr_accessor :name_location
 
-  paginates_per 10
+  paginates_per 20
   scope :active, -> { where(:active_status => true) }
   scope :inactive, -> { where(:active_status => false) }
 

@@ -12,7 +12,7 @@ class DailyCollectionsController < ApplicationController
                   filename: "Collection_Report_On_#{params[:date]}",
                   type: 'application/pdf'
       end
-      @daily_collections = DailyCollection.date_wise_report(params[:date]).page(params[:page]).per(10)
+      @daily_collections = DailyCollection.date_wise_report(params[:date]).page(params[:page]).per(20)
       format.html
     end
   end

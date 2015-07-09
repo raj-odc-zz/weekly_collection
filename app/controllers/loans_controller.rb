@@ -45,7 +45,7 @@ class LoansController < ApplicationController
 
   def destroy
     @loan.update_columns(:active_status => false)
-    respond_with(@loan)
+    redirect_to customers_path
   end
 
   private

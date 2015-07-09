@@ -34,7 +34,7 @@ class DashboardController < ApplicationController
   def init_entries(date)
     entries = Entry.by_date(date)
     @entries = {}
-    prev_day_transaction = Transaction.by_date(Date.parse(date) - 1).first
+    prev_day_transaction = Transaction.by_date(Date.parse(date) - 1).first_or_create
     @entries[:opening_balance] = prev_day_transaction.closing_balance
     @entries[:collection]  = DailyCollection.total_amount(date)
     @entries[:new_loan]  = Loan.total_paid(date)

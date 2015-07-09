@@ -37,7 +37,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.update(:active_status => false)
-    respond_with(@customer)
+    redirect_to customers_path
   end
 
   private

@@ -3,7 +3,7 @@ class Loan < ActiveRecord::Base
   belongs_to :customer
   has_many :daily_collections, dependent: :destroy
 
-  paginates_per 10
+  paginates_per 20
 
   default_scope { order(order_no: :asc) }
 
